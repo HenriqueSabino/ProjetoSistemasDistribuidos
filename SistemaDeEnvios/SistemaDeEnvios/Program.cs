@@ -12,13 +12,21 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Todo: Add real database here
-builder.Services.AddDbContext<ApiDbContext>(opt => opt.UseInMemoryDatabase("SistemaDeEnvios"));
+builder.Services.AddDbContext<ApiDbContext>(opt =>
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 builder.Services.AddTransient<IParcelService, ParcelService>();
 
 builder.Services.AddHealthChecks();
 var app = builder.Build();
 app.MapHealthChecks("/health");
+
+
+using (var serviceScope = app.Services.CreateScope())
+{
+    var serviceDb = serviceScope.ServiceProvider.GetService<ApiDbContext>();
+    serviceDb.Database.Migrate();
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

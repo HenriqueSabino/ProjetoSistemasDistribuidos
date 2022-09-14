@@ -21,6 +21,7 @@ public class ParcelService : IParcelService
         try
         {
             await this._context.Parcels.AddAsync(parcel);
+            await this._context.SaveChangesAsync();
             return parcel;
         }
         catch (Exception e)
