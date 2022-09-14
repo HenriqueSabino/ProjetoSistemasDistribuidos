@@ -6,7 +6,7 @@ public interface IParcelService
 {
     Task<ICollection<Parcel>> GetAll();
 
-    Task<Parcel> GetById(int id);
+    Task<Parcel?> GetById(int id);
 
     Task<Parcel> Add(Parcel parcel);
 

@@ -67,7 +67,7 @@ public class ParcelService : IParcelService
         }
     }
 
-    public async Task<Parcel> GetById(int id)
+    public async Task<Parcel?> GetById(int id)
     {
         try
         {

@@ -16,7 +16,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApiDbContext>(opt => opt.UseInMemoryDatabase("SistemaDeEnvios"));
 builder.Services.AddTransient<IParcelService, ParcelService>();
 
+builder.Services.AddHealthChecks();
 var app = builder.Build();
+app.MapHealthChecks("/health");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
