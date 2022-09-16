@@ -1,0 +1,18 @@
+services:
+  SistemaDeEnviosDB:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: mssqlserverdb
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=DataPass@2022
+    ports:
+      - 1450:1433
+  sistema-de-envios:
+    build:
+      dockerfile: "./Dockerfile"
+    container_name: sistema-de-envios
+    ports:
+      - 5000:80
+      - 5001:443
+    depends_on:
+      - SistemaDeEnviosDB
