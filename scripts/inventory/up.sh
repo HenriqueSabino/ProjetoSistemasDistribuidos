@@ -1,0 +1,1 @@
+docker compose -f inventory/dev.yaml up -d --build

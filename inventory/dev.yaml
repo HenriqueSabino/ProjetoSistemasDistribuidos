@@ -1,0 +1,36 @@
+version: '3.9'
+
+services:
+  broker:
+    image: rabbitmq:3.8.19-management-alpine
+    env_file:
+      - .env
+    ports:
+      - 15672:15672
+      - 5672:5672
+    restart: always
+  
+  database:
+    image: postgres:10.18-alpine3.14
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres-data:/var/lib/postgresql/data/pgdata
+
+  app:
+    build: .
+    restart: always
+    env_file:
+      - .env
+    command: bash -c "nameko run --config ./config.yaml application.main"
+    volumes:
+      - ./app:/code/app
+    depends_on:
+      - database
+      - broker
+
+volumes:
+  postgres-data:
