@@ -1,4 +1,4 @@
-using SistemaDeEnvios.Models;
+using SistemaDeEnvios.Data.Models;
 
 namespace SistemaDeEnvios.Business.Interfaces;
 

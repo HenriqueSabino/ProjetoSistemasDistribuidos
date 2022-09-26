@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SistemaDeEnvios.Business.Interfaces;
-using SistemaDeEnvios.Models;
-using SistemaDeEnvios.Models.Enums;
+using SistemaDeEnvios.Data.Models;
+using SistemaDeEnvios.Data.Models.Enums;
 
 namespace SistemaDeEnvios.Controllers;
 

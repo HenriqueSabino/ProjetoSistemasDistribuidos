@@ -9,12 +9,9 @@ RUN dotnet publish "./SistemaDeEnvios/SistemaDeEnvios.csproj" -o /app --no-resto
 FROM mcr.microsoft.com/dotnet/aspnet:6.0-focal AS Stage
 WORKDIR /app
 COPY --from=Build /app ./
-COPY https.pfx ./https/https.pfx
 
-ENV ASPNETCORE_Kestrel__Certificates__Default__Path=./https/https.pfx
-ENV ASPNETCORE_Kestrel__Certificates__Default__Password=projetoSD123456
-ENV ASPNETCORE_URLS=https://+
+ENV ASPNETCORE_URLS=http://+
 
-EXPOSE 443
+EXPOSE 80
 
 ENTRYPOINT ["dotnet", "SistemaDeEnvios.dll"]

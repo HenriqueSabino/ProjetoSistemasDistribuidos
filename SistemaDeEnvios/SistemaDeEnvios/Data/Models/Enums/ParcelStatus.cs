@@ -1,4 +1,4 @@
-namespace SistemaDeEnvios.Models.Enums;
+namespace SistemaDeEnvios.Data.Models.Enums;
 
 public enum ParcelStatus
 {
