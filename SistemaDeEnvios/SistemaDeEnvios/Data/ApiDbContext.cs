@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using SistemaDeEnvios.Models;
+using SistemaDeEnvios.Data.Models;
 
 namespace SistemaDeEnvios.Data;
 

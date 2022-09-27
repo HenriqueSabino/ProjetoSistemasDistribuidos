@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
-using SistemaDeEnvios.Models.Enums;
+using SistemaDeEnvios.Data.Models.Enums;
 
-namespace SistemaDeEnvios.Models;
+namespace SistemaDeEnvios.Data.Models;
 
 public class Parcel
 {

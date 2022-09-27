@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SistemaDeEnvios.Business.Interfaces;
 using SistemaDeEnvios.Data;
-using SistemaDeEnvios.Models;
+using SistemaDeEnvios.Data.Models;
 
 namespace SistemaDeEnvios.Business.Services;
 
