@@ -1,1 +1,0 @@
-docker compose -f inventory/dev.yaml logs -f app

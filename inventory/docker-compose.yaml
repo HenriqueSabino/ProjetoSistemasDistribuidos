@@ -1,0 +1,37 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:11.17-alpine
+    env_file:
+      - ./.env
+    volumes:
+      - type: volume
+        source: postgres-data
+        target: /var/lib/postgresql/data/pgdata
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+
+  app:
+    env_file:
+        - ./.env
+    build: .
+    command: sh -c "python manage.py wait_for_db &&
+                    python manage.py migrate &&
+                    python -m manage runserver 0.0.0.0:8000"
+    restart: always
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    volumes:
+      - ./app:/code/app
+
+volumes:
+  postgres-data:
