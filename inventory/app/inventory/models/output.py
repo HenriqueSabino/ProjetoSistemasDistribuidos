@@ -12,6 +12,7 @@ class Output(models.Model):
         shipping_company.ShippingCompany,
         on_delete=models.CASCADE
     )
+    parcel = models.IntegerField()
     total = models.FloatField()
     shipping = models.FloatField()
     created_at = models.DateTimeField(auto_now_add=True)
