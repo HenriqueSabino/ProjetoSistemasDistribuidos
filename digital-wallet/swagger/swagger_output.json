@@ -1,0 +1,70 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "REST API",
+    "description": ""
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/buy": {
+      "post": {
+        "description": "Route for purchases.",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "example": "any"
+                },
+                "price": {
+                  "example": "any"
+                }
+              }
+            },
+            "description": " ID do usuário.",
+            "required": true,
+            "example": "userID1"
+          },
+          {
+            "name": "price",
+            "description": "Valor da compra.",
+            "required": true,
+            "in": "body",
+            "example": "25",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    }
+  }
+}
