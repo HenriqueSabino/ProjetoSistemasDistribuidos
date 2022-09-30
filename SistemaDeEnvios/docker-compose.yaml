@@ -1,3 +1,5 @@
+version: '3.9'
+
 services:
   SistemaDeEnviosDB:
     image: mcr.microsoft.com/mssql/server:2022-latest
@@ -15,3 +17,8 @@ services:
       - 5000:80
     depends_on:
       - SistemaDeEnviosDB
+
+networks:
+  default:
+    name: sd-network
+    external: true
