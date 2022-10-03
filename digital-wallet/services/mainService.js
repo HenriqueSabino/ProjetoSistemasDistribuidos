@@ -12,6 +12,7 @@ const buy = async (userId, price) => {
             // TO-DO: Request to save purchase on real-time database
             user.balance = user.balance - price
             await user.save();
+            // TO-DO: Request to start sending product locations
             return true
         }
     } catch (error) {
@@ -19,6 +20,21 @@ const buy = async (userId, price) => {
     }
 }
 
+const balance = async (userId) => {
+    try {
+        const user = await Carteira.findOne({where: {userId: userId}});
+        console.log(userId)
+        if(user == null) {
+            throw Error(ERRORS.USER_NOT_PRESENT.toString())
+        } else {
+            return user.balance
+        }
+    } catch (error) {
+        throw Error(error)
+    }
+}
+
 module.exports = {
-    buy
+    buy,
+    balance
 }

@@ -27,32 +27,22 @@
         "description": "Route for purchases.",
         "parameters": [
           {
-            "name": "userId",
+            "name": "body",
+            "description": " ID do usuário.",
+            "required": true,
             "in": "body",
             "schema": {
               "type": "object",
               "properties": {
                 "userId": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "user1"
                 },
                 "price": {
-                  "example": "any"
+                  "type": "number",
+                  "example": 25
                 }
               }
-            },
-            "description": " ID do usuário.",
-            "required": true,
-            "example": "userID1"
-          },
-          {
-            "name": "price",
-            "description": "Valor da compra.",
-            "required": true,
-            "in": "body",
-            "example": "25",
-            "schema": {
-              "type": "object",
-              "properties": {}
             }
           }
         ],
@@ -61,7 +51,30 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "{ message: \"Error: NOT_ENOUGH_BALANCE\" } \n { message: \"Error: USER_NOT_PRESENT\" } \n { message: \"Error: FAILED_TO_WRITE_PURCHASE\" } \n "
+          }
+        }
+      }
+    },
+    "/api/balance": {
+      "get": {
+        "description": "Route for balance.",
+        "parameters": [
+          {
+            "name": "userId",
+            "description": " ID do usuário.",
+            "type": "string",
+            "required": true,
+            "in": "query",
+            "example": "userID1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "{ balance: 100 }"
+          },
+          "400": {
+            "description": "{ message: \"Error: NOT_ENOUGH_BALANCE\" } \n { message: \"Error: USER_NOT_PRESENT\" } \n { message: \"Error: FAILED_TO_WRITE_PURCHASE\" } \n "
           }
         }
       }
