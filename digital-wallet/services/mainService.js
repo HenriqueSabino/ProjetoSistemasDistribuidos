@@ -1,5 +1,6 @@
 const Carteira = require('../models/carteira');
 const ERRORS = require('../helpers/errorsEnum')
+const axios = require('axios');
 
 const buy = async (userId, price) => {
     try {
@@ -12,7 +13,17 @@ const buy = async (userId, price) => {
             // TO-DO: Request to save purchase on real-time database
             user.balance = user.balance - price
             await user.save();
-            // TO-DO: Request to start sending product locations
+
+            const data = {
+                orderId: 'from_to_do_integration_with_realtime_database'
+            };
+            
+            await axios.post('http://localhost:5000/Parcel/Add', data)
+            .catch((err) => {
+                console.log(err)
+                throw Error(ERRORS.FAILED_TO_SEND_PURCHASE_TO_DELIVERY_SYSTEM);
+            });
+
             return true
         }
     } catch (error) {
