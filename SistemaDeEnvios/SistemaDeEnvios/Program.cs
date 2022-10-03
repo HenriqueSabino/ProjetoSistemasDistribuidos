@@ -17,6 +17,8 @@ builder.Services.AddDbContext<ApiDbContext>(opt =>
 
 builder.Services.AddTransient<IParcelService, ParcelService>();
 
+builder.Services.AddSingleton(sp => RabbitMQHutch.CreateBus(builder.Configuration["RabbitMQ:URL"]));
+
 builder.Services.AddHealthChecks();
 var app = builder.Build();
 app.MapHealthChecks("/health");

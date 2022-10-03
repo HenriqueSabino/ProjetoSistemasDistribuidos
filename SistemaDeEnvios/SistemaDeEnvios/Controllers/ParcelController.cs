@@ -10,10 +10,12 @@ namespace SistemaDeEnvios.Controllers;
 public class ParcelController : ControllerBase
 {
     private readonly IParcelService _parcelService;
+    private readonly IBus _messageBus;
 
-    public ParcelController(IParcelService parcelService)
+    public ParcelController(IParcelService parcelService, IBus messageBus)
     {
         this._parcelService = parcelService;
+        this._messageBus = messageBus;
     }
 
     [HttpGet("[action]")]
