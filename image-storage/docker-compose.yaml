@@ -9,16 +9,18 @@ services:
       - SA_PASSWORD=DataPass@2022
     ports:
       - 1452:1433
+    restart: always
   blob-storage:
     build:
       dockerfile: "./Dockerfile"
     container_name: blob-storage
     ports:
       - 5010:80
+    restart: always
     depends_on:
       - BlobStorageDB
 
-# networks:
-#   default:
-#     name: blob-storage-network
-#     external: true
+networks:
+  default:
+    name: sd-network
+    external: true
