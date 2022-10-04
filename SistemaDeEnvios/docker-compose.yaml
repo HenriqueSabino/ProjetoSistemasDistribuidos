@@ -9,6 +9,7 @@ services:
       - SA_PASSWORD=DataPass@2022
     ports:
       - 1450:1433
+    restart: always
   sistema-de-envios:
     build:
       dockerfile: "./Dockerfile"
@@ -17,9 +18,8 @@ services:
       - 5000:80
     depends_on:
       - SistemaDeEnviosDB
-    networks:
-      - sd-network
-
+      - rabbitmq
+    restart: always
   rabbitmq:
     image: rabbitmq:3-management-alpine
     container_name: 'rabbitmq'
@@ -27,13 +27,8 @@ services:
         - 5672:5672
         - 15672:15672
     restart: always
-    networks:
-      - rabbitmq_net
 
 networks:
-  sd-network:
+  default:
     name: sd-network
-    driver: bridge
-  rabbitmq_net:
-    name: rabbitmq_net
-    driver: bridge
+    external: true

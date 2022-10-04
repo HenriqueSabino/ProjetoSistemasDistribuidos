@@ -15,7 +15,7 @@ const buy = async (userId, price) => {
             //     // TODO
             // };
 
-            // const res = await axios.post('TODO: this request', realtimeDbData)
+            // const res = await axios.post('http://inventory/...', realtimeDbData)
             //     .catch((err) => {
             //         console.log(err)
             //         throw Error(ERRORS.FAILED_TO_WRITE_PURCHASE);
