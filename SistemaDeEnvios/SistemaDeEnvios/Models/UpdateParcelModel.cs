@@ -1,16 +1,14 @@
-using System.ComponentModel.DataAnnotations;
 using SistemaDeEnvios.Data.Models.Enums;
 
-namespace SistemaDeEnvios.Data.Models;
+namespace SistemaDeEnvios.Models;
 
-public class Parcel
+public class UpdateParcelModel
 {
-    [Key]
     public int Id { get; set; }
 
-    public ParcelStatus Status { get; set; }
-
     public string OrderId { get; set; }
+
+    public ParcelStatus Status { get; set; }
 
     public decimal? Latitude { get; set; }
 

@@ -10,15 +10,25 @@ const buy = async (userId, price) => {
         } else if(user.balance < price) {
             throw Error(ERRORS.NOT_ENOUGH_BALANCE)
         } else {
-            // TO-DO: Request to save purchase on real-time database
+
+            // const realtimeDbData = {
+            //     // TODO
+            // };
+
+            // const res = await axios.post('TODO: this request', realtimeDbData)
+            //     .catch((err) => {
+            //         console.log(err)
+            //         throw Error(ERRORS.FAILED_TO_WRITE_PURCHASE);
+            //     });
+
             user.balance = user.balance - price
             await user.save();
 
-            const data = {
-                orderId: 'from_to_do_integration_with_realtime_database'
+            const deliverySysData = {
+                orderId: "bla"
             };
             
-            await axios.post('http://localhost:5000/Parcel/Add', data)
+            await axios.post('http://sistema-de-envios/Parcel/Add', deliverySysData)
             .catch((err) => {
                 console.log(err)
                 throw Error(ERRORS.FAILED_TO_SEND_PURCHASE_TO_DELIVERY_SYSTEM);
