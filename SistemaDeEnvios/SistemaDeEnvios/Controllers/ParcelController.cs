@@ -17,6 +17,8 @@ public class ParcelController : ControllerBase
     {
         this._parcelService = parcelService;
         this._messageBus = messageBus;
+
+        this._messageBus.ReceiveAsync<AddParcelModel>("parcel-requests", this.AddParcel);
     }
 
     [HttpGet("[action]")]
@@ -47,7 +49,6 @@ public class ParcelController : ControllerBase
     {
         var newParcel = await this._parcelService.Add(new Parcel()
         {
-            OrderId = model.OrderId,
             Status = model.Status,
             Latitude = model.Latitude,
             Longitude = model.Longitude,
@@ -71,7 +72,6 @@ public class ParcelController : ControllerBase
             return this.NotFound();
         }
 
-        parcel.OrderId = model.OrderId;
         parcel.Status = model.Status;
 
         if (model.Latitude.HasValue && model.Longitude.HasValue)
@@ -101,5 +101,18 @@ public class ParcelController : ControllerBase
         {
             return this.NotFound();
         }
+    }
+
+    private async void AddParcel(AddParcelModel model)
+    {
+        var newParcel = await this._parcelService.Add(new Parcel()
+        {
+            Status = model.Status,
+            Latitude = model.Latitude,
+            Longitude = model.Longitude,
+        });
+
+        var uri = new Uri($"{this.Request.Scheme}://{this.Request.Host}/{nameof(this.GetById)}/{newParcel.Id}");
+        await this._messageBus.SendAsync<Parcel>("parcels-updates", newParcel);
     }
 }

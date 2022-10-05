@@ -6,8 +6,6 @@ public class UpdateParcelModel
 {
     public int Id { get; set; }
 
-    public string OrderId { get; set; }
-
     public ParcelStatus Status { get; set; }
 
     public decimal? Latitude { get; set; }

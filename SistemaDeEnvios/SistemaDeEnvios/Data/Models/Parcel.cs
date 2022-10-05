@@ -10,8 +10,6 @@ public class Parcel
 
     public ParcelStatus Status { get; set; }
 
-    public string OrderId { get; set; }
-
     public decimal? Latitude { get; set; }
 
     public decimal? Longitude { get; set; }

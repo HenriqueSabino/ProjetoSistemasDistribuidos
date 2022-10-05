@@ -11,28 +11,28 @@ const buy = async (userId, price) => {
             throw Error(ERRORS.NOT_ENOUGH_BALANCE)
         } else {
 
+            user.balance = user.balance - price
+
+            const response = await axios.post('http://sistema-de-envios/Parcel/Add', {})
+                .catch((err) => {
+                    console.log(err)
+                    throw Error(ERRORS.FAILED_TO_SEND_PURCHASE_TO_DELIVERY_SYSTEM);
+                });
+
             // const realtimeDbData = {
-            //     // TODO
+            //     "quantity": 3,
+            //     "parcel": response.data.id,
+            //     "user": 1,
+            //     "product": 1
             // };
 
-            // const res = await axios.post('http://inventory/...', realtimeDbData)
+            // await axios.post('http://inventory/orders', realtimeDbData)
             //     .catch((err) => {
             //         console.log(err)
             //         throw Error(ERRORS.FAILED_TO_WRITE_PURCHASE);
             //     });
 
-            user.balance = user.balance - price
             await user.save();
-
-            const deliverySysData = {
-                orderId: "bla"
-            };
-            
-            await axios.post('http://sistema-de-envios/Parcel/Add', deliverySysData)
-            .catch((err) => {
-                console.log(err)
-                throw Error(ERRORS.FAILED_TO_SEND_PURCHASE_TO_DELIVERY_SYSTEM);
-            });
 
             return true
         }
